@@ -1,0 +1,23 @@
+services:
+  db:
+    container_name: postgres-blog
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: blog_db
+      PGDATA: /data/postgres
+    volumes:
+      - db:/data/postgres
+    ports:
+      - "5332:5432"
+    networks:
+      - pgadmin-net
+    restart: unless-stopped
+
+
+networks:
+  pgadmin-net:
+    external: true
+volumes:
+  db:
