@@ -1,28 +1,41 @@
-package org.blog;
+package com.claudia.blog.domain.entity;
+
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
+@Entity
+@Table(name = "BlogPosts")
 public class Post {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name="title",nullable = false)
     private String title;
+
+    @Column(name="content",nullable = false)
     private String content;
-    private User author;
+
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private UserAccount author;
 
     public Post() {
     }
 
-    public Post(int id, String title, String content, User author) {
+    public Post(Integer id, String title, String content, UserAccount author) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.author = author;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -42,11 +55,11 @@ public class Post {
         this.content = content;
     }
 
-    public User getAuthor() {
+    public UserAccount getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(UserAccount author) {
         this.author = author;
     }
 
@@ -54,7 +67,7 @@ public class Post {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Post post = (Post) o;
-        return id == post.id && Objects.equals(title, post.title) && Objects.equals(content, post.content) && Objects.equals(author, post.author);
+        return Objects.equals(id, post.id) && Objects.equals(title, post.title) && Objects.equals(content, post.content) && Objects.equals(author, post.author);
     }
 
     @Override

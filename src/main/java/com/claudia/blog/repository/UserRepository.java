@@ -1,0 +1,11 @@
+package com.claudia.blog.repository;
+
+import com.claudia.blog.domain.entity.UserAccount;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<UserAccount, Integer>{
+    Optional<UserAccount> findByUsername(String username);
+    Boolean existsByUsername(String username);
+}
