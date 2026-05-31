@@ -2,6 +2,7 @@ package com.claudia.blog.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwt;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -46,8 +47,15 @@ public class JWTGenerator {
                     .build()
                     .parseSignedClaims(token);
             return true;
-        } catch (Exception e){
-            throw new AuthenticationCredentialsNotFoundException("JWT was expired or incorrect");
+        }
+        catch (ExpiredJwtException e){
+            System.out.println("Token expired");
+            return false;
+        }
+        catch (Exception e){
+            System.out.println("Invalid token");
+            return false;
+            //throw new AuthenticationCredentialsNotFoundException("JWT was expired or incorrect");
         }
     }
 }

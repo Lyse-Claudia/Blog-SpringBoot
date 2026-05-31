@@ -23,8 +23,9 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post createPost(CreatePostRequest request){
-        UserAccount author = userRepository.findById(request.authorId()).orElseThrow(()->new RuntimeException("User not found"));
+    public Post createPost(CreatePostRequest request, String username){
+        UserAccount author = userRepository.findByUsername(username)
+                .orElseThrow(()->new RuntimeException("User not found"));
         Post newPost = new Post(
                 null,
                 request.title(),

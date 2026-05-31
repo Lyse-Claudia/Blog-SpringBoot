@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PostService {
 
-    Post createPost(CreatePostRequest request);
+    Post createPost(CreatePostRequest request, String username);
 
     List<Post> listPosts();
 

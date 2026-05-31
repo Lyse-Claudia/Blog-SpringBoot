@@ -15,12 +15,12 @@ public record CreatePostRequestDto(
 
         @NotBlank(message = ERROR_MESSAGE_CONTENT_LENGTH)
         @Length(max = 255, message = ERROR_MESSAGE_CONTENT_LENGTH)
-        String content,
+        String content
 
-        @NotNull(message = ERROR_MESSAGE_AUTHOR)
+        /*@NotNull(message = ERROR_MESSAGE_AUTHOR)
         @ManyToOne
         @JoinColumn(name = "author_id")
-        UserAccount author
+        UserAccount author*/
 ) {
         private static final String ERROR_MESSAGE_TITLE_LENGTH =
                 "Title must be between 1 and 255 characters";

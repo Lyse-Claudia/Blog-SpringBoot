@@ -13,8 +13,7 @@ public class PostMapperImpl implements PostMapper {
     public CreatePostRequest fromDto(CreatePostRequestDto dto){
         return new CreatePostRequest(
                 dto.title(),
-                dto.content(),
-                dto.author().getId()
+                dto.content()
         );
     }
 

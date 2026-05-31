@@ -9,6 +9,7 @@ import com.claudia.blog.service.PostService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,10 +29,12 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<PostDto> createPost(
-            @Valid @RequestBody CreatePostRequestDto createPostRequestDto){
+            @Valid @RequestBody CreatePostRequestDto createPostRequestDto,
+            Authentication authentication){
+        String username = authentication.getName();
         CreatePostRequest postToCreate = postMapper.fromDto(createPostRequestDto);
 
-        Post createdPost = postService.createPost(postToCreate);
+        Post createdPost = postService.createPost(postToCreate, username);
 
         PostDto createdTaskDto = postMapper.toDto(createdPost);
 
